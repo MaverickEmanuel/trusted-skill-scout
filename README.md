@@ -1,92 +1,83 @@
+<div align="center">
+
 # trusted-skill-scout
 
-Find the right skills for any repository, filter out low-trust options, and install your picks safely.
+Find trusted, high-signal agent skills for any repo, then install only what you approve.
 
-`trusted-skill-scout` is a reusable Agent Skill for people who want better signal than "just run skills find and hope." It profiles the repo, ranks relevant skills, applies a trust gate, keeps you in the loop, and installs only what you approve.
+[![GitHub stars](https://img.shields.io/github/stars/MaverickEmanuel/trusted-skill-scout?style=flat-square)](https://github.com/MaverickEmanuel/trusted-skill-scout)
 
-## Quickstart
+[Open on skills.sh](https://skills.sh/YOUR-SKILL-PAGE) • [Star on GitHub](https://github.com/MaverickEmanuel/trusted-skill-scout) • [Read the spec](./SKILL.md)
+
+</div>
+
+> [!TIP]
+> **Quick install (project scope, recommended)**
+> ```bash
+> npx skills add MaverickEmanuel/trusted-skill-scout
+> ```
+
+<details>
+<summary><strong>Other install options</strong></summary>
+
+Global install:
 
 ```bash
-npx skills add MaverickEmanuel/trusted-skill-scout
+npx skills add MaverickEmanuel/trusted-skill-scout -g
 ```
 
-After install, the skill asks install scope inside the flow:
-- `Project-only` (default, recommended)
-- `Global`
+Install a specific skill from this repo (when applicable):
 
-## Why Use This
+```bash
+npx skills add MaverickEmanuel/trusted-skill-scout --skill "<skill_name>"
+```
 
-- Repo-aware recommendations, not random search spam
-- Trust filtering before options are shown
-- Human approval at every important decision point
-- Deterministic install commands
-- Verification output you can audit
+</details>
 
-## What It Does
+## Why this skill
 
-1. Profiles your current repo (stack, workflow, goals)
-2. Generates tailored `npx skills find` queries
-3. Fetches trust metadata (installs/stars/owner)
-4. Filters to trust-eligible candidates only
-5. Ranks and presents compact keep/skip options
-6. Installs selected skills with one final confirmation gate
-7. Verifies installation and prints retry commands if needed
+- Repo-aware discovery (stack + workflows + goals), not generic query spam.
+- Hard trust gate before options are shown.
+- Human confirmation at key steps (`Keep` picks + final install gate).
+- Deterministic install and verification commands with retry guidance on failure.
 
-## Trust Model
+## How it works
 
-A candidate is eligible only if at least one condition is true:
+1. Ask install scope first (`Project-only` default).
+2. Profile the repo and generate 6-10 focused discovery queries.
+3. Trust-filter and rank candidates with transparent fit scoring.
+4. Install only approved skills, then verify with `npx skills list` and `npx skills check`.
 
-- Owner is in allowlist (major trusted orgs)
-- Installs >= 100
-- GitHub stars >= 500
+## Trust model
 
-If metadata is missing, the skill treats missing values as `0` unless owner is allowlisted.
+A candidate is eligible if **any** of these is true:
 
-See:
-- `references/trust-policy.md`
-- `references/scoring-rubric.md`
+- owner is allowlisted
+- installs `>= 100`
+- GitHub stars `>= 500`
 
-## Output Style
+Missing numeric metadata is treated as `0` unless allowlisted.
 
-Per query, you get short ranked cards like:
+> [!IMPORTANT]
+> Trust filtering is a heuristic, not a security guarantee. Keep normal review and validation practices.
+
+## Example interaction
 
 ```text
-[1] owner/repo@skill-name
+[1] owner/repo@skill_name
 Trust: stars>=500
 Fit: 17/20 | Verdict: Strong fit
-Why: aligns with your Next.js testing + CI workflow
-Agent recommendation: Keep - high fit and low overlap
+Why: matches this repo's test + CI workflow
+Agent recommendation: Keep - high impact, low overlap
 
 Your choice? Keep: 1,3 or Keep: none
 ```
 
-No noisy dumps, no auto-install surprises.
+## Learn more
 
-## Compatibility
+- Behavior contract: `SKILL.md`
+- Trust policy: `references/trust-policy.md`
+- Scoring rubric: `references/scoring-rubric.md`
+- Query generation: `references/query-generation.md`
+- Full transcript: `examples/sample-session.md`
 
-- Claude Code
-- OpenCode
-- Other Skills-compatible agents (via Skills CLI)
-
-## Example Session
-
-See `examples/sample-session.md` for a full interaction transcript.
-
-## Roadmap
-
-- Team-level trust policy profiles
-- Optional lockfile/export for reproducible bundles
-- Better confidence scoring for niche domains
-- Faster metadata caching for large discovery runs
-
-## Contributing
-
-Contributions are welcome. Start with `CONTRIBUTING.md`.
-
-## License
-
-MIT
-
----
-
-If this skill saves you time or prevents bad installs, please star the repo.
+If this skill saves you time, please star the repo.
