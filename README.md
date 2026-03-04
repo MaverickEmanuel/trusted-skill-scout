@@ -7,7 +7,7 @@ Find the right skills for any repository, filter out low-trust options, and inst
 ## Quickstart
 
 ```bash
-npx skills add <your-username>/trusted-skill-scout -y
+npx skills add MaverickEmanuel/trusted-skill-scout -y
 ```
 
 After install, the skill asks install scope inside the flow:
