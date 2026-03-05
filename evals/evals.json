@@ -4,11 +4,13 @@
     {
       "id": 1,
       "prompt": "I am in a Next.js repo and want useful skills for performance, testing, and release quality. Find and install only trusted options.",
-      "expected_output": "Asks install scope first, profiles repo, generates targeted queries, applies trust filter, asks keep choices, and installs confirmed picks.",
+      "expected_output": "Asks install scope first, states skill purpose, profiles repo, generates targeted queries, applies trust filter, collects keep choices (interactive when available), and installs confirmed picks.",
       "files": [],
       "expectations": [
         "install scope prompt appears first with project-only default",
+        "assistant clearly states the skill purpose after scope selection",
         "queries are repo-aware and not generic only",
+        "per-query options show up to 4 trust-eligible candidates when available",
         "final output includes deterministic install commands"
       ]
     },
@@ -21,7 +23,7 @@
         "candidate cards include trust reason",
         "cards include fit score and verdict",
         "when fit ties, higher installs appear first",
-        "assistant asks Keep selection per query"
+        "assistant uses interactive multi-select per query when available with deterministic Keep fallback"
       ]
     },
     {
@@ -52,7 +54,7 @@
       "expected_output": "Profiles monorepo complexity and surfaces trust-eligible CI/code quality skills.",
       "files": [],
       "expectations": [
-        "uses human-in-the-loop Keep prompts",
+        "uses human-in-the-loop per-query selection with interactive multi-select when available",
         "applies trust gate before presenting options",
         "dedupes final shortlist"
       ]

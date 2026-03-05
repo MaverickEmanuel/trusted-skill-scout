@@ -15,6 +15,8 @@ User: default is good
 
 Assistant: Great, using Project-only.
 
+Assistant: What this skill does: discovers repo-relevant skills, applies a trust gate, and installs only the skills you explicitly approve.
+
 Assistant: Repo profile
 - Stack: Node.js, TypeScript, Express
 - Workflows: Jest tests, lint, GitHub Actions
@@ -34,9 +36,24 @@ Fit: 16/20 | Verdict: Strong fit
 Why: strong auth hardening coverage, but lower installs than option 1.
 Agent recommendation: Keep - strong fit, but secondary to option 1 on popularity.
 
-Your choice? Keep: 1,2 or Keep: none
+[3] owner-c/ops-skills@api-rate-limit-guardrails
+Trust: installs>=100
+Fit: 15/20 | Verdict: Strong fit
+Why: focused on distributed rate limiting and abuse mitigation workflows.
+Agent recommendation: Keep - complements auth hardening with low overlap.
 
-User: Keep: 1
+[4] owner-d/platform-skills@incident-ready-api-runbooks
+Trust: stars>=500
+Fit: 12/20 | Verdict: Maybe
+Why: useful incident patterns, but broader than immediate auth goals.
+Agent recommendation: Skip - useful later, lower immediate value than 1 and 3.
+
+Select skills to keep for this query
+(Use arrow keys to move, Space to toggle, Enter to confirm)
+
+User: (selected 1 and 3)
+
+Assistant: Selection recorded: Keep: 1,3
 
 ... (additional query rounds)
 

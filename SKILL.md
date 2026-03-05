@@ -6,6 +6,7 @@ allowed-tools:
   - Glob
   - Grep
   - Bash
+  - Question
   - Task
   - WebFetch
 ---
@@ -18,13 +19,13 @@ Find high-signal skills for the current repository, filter by trust policy, coll
 
 Follow this flow in order. Do not skip gates.
 
-1. Ask install scope before discovery (default: project-only).
+1. Ask install scope before discovery (default: project-only), then state what this skill does.
 2. Profile the repo (parallel sub-agents when available).
 3. Generate 6-10 repo-aware discovery queries.
 4. Run discovery queries sequentially with `npx skills find`.
 5. Enrich candidates with trust metadata.
 6. Apply trust filter.
-7. Rank, present compact cards, and ask `Keep: ...`.
+7. Rank, present compact cards, and collect keep selections (interactive multi-select when available).
 8. Build final shortlist and ask install confirmation.
 9. Install selected skills sequentially with deterministic commands.
 10. Verify and report results.
@@ -34,6 +35,10 @@ Follow this flow in order. Do not skip gates.
 Always ask exactly once at the beginning:
 
 `Install approved skills as Global or Project-only? (default: Project-only)`
+
+After scope is chosen, state the purpose clearly in one line:
+
+`What this skill does: discovers repo-relevant skills, applies a trust gate, and installs only the skills you explicitly approve.`
 
 Rules:
 - If user does not choose explicitly, use `Project-only`.
@@ -151,6 +156,11 @@ Sort with tie-breakers (if fit is equal, prioritize popularity):
 
 For each query, show only trust-eligible candidates as compact cards.
 
+Display count rules:
+- Show up to 4 ranked candidates per query.
+- Target 3-4 options when available.
+- If fewer than 3 are eligible, show all eligible options.
+
 Card format:
 
 `[1] owner/repo@skill_name`
@@ -159,7 +169,23 @@ Card format:
 `Why: <one line repo-specific rationale>`
 `Agent recommendation: <Keep|Skip> + short reason`
 
-Then ask:
+Then collect selection with an interactive multi-select prompt when available.
+
+Preferred prompt behavior:
+- Use arrow keys to move.
+- Use Space to toggle one or more options.
+- Use Enter to confirm.
+- Prompt text: `Select skills to keep for this query`
+
+After interactive confirmation, echo a deterministic record line:
+
+`Selection recorded: Keep: 1,3`
+
+If nothing selected:
+
+`Selection recorded: Keep: none`
+
+Fallback (if interactive prompt is unavailable):
 
 `Your choice? Keep: 1,3 or Keep: none`
 
@@ -216,6 +242,7 @@ Use concise sections:
 1. Scope
 - selected scope
 - whether default was used
+- one-line purpose statement shown to user
 
 2. Repo Profile
 - stack
@@ -224,8 +251,9 @@ Use concise sections:
 
 3. Query N Results
 - ranked eligible cards
+- show up to 4 options per query (3-4 when available)
 - one explicit agent pick
-- `Your choice? Keep: ...`
+- interactive multi-select prompt (fallback: `Your choice? Keep: ...`)
 
 4. Final Shortlist
 - deduped list

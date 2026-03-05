@@ -43,9 +43,11 @@ npx skills add MaverickEmanuel/trusted-skill-scout --skill "<skill_name>"
 ## How it works
 
 1. Ask install scope first (`Project-only` default).
-2. Profile the repo and generate 6-10 focused discovery queries.
-3. Trust-filter and rank candidates with transparent fit scoring; if fit ties, prioritize popularity (`installs`, then `stars`).
-4. Install only approved skills, then verify with `npx skills list` and `npx skills check`.
+2. State purpose clearly: discover repo-relevant skills, trust-filter them, and install only what you approve.
+3. Profile the repo and generate 6-10 focused discovery queries.
+4. Trust-filter and rank candidates with transparent fit scoring; if fit ties, prioritize popularity (`installs`, then `stars`).
+5. Show up to 4 trust-eligible options per query (target 3-4 when available) and collect choices with interactive multi-select when supported; fall back to deterministic text input (`Keep: 1,3` or `Keep: none`) when interactive prompts are unavailable.
+6. Install only approved skills, then verify with `npx skills list` and `npx skills check`.
 
 ## Trust model
 
@@ -69,7 +71,10 @@ Fit: 17/20 | Verdict: Strong fit
 Why: matches this repo's test + CI workflow
 Agent recommendation: Keep - high impact, low overlap
 
-Your choice? Keep: 1,3 or Keep: none
+Select skills to keep for this query
+(Use arrow keys to move, Space to toggle, Enter to confirm)
+
+Fallback: Your choice? Keep: 1,3 or Keep: none
 ```
 
 ## Learn more
