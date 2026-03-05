@@ -26,15 +26,15 @@ Assistant: Query 1/6: `express jwt auth security skill`
 Trust: installs>=100
 Fit: 16/20 | Verdict: Strong fit
 Why: directly targets JWT middleware and route protection.
-Agent recommendation: Keep - high fit, low overlap.
+Agent recommendation: Keep - high fit, low overlap, and highest installs.
 
 [2] owner-b/dev-skills@secure-http-checklist
 Trust: stars>=500
-Fit: 13/20 | Verdict: Maybe
-Why: useful hardening checklist, but partially overlaps existing lint rules.
-Agent recommendation: Skip - moderate overlap.
+Fit: 16/20 | Verdict: Strong fit
+Why: strong auth hardening coverage, but lower installs than option 1.
+Agent recommendation: Keep - strong fit, but secondary to option 1 on popularity.
 
-Your choice? Keep: 1,3 or Keep: none
+Your choice? Keep: 1,2 or Keep: none
 
 User: Keep: 1
 

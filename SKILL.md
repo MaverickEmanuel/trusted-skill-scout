@@ -140,10 +140,10 @@ Verdict:
 - `Maybe` if `fit_total >= 11`
 - otherwise exclude
 
-Sort with tie-breakers:
+Sort with tie-breakers (if fit is equal, prioritize popularity):
 1. fit_total desc
-2. stars desc
-3. installs desc
+2. installs desc
+3. stars desc
 4. owner/repo asc
 5. skill_name asc
 

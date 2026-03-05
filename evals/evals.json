@@ -15,11 +15,12 @@
     {
       "id": 2,
       "prompt": "For this Express API repo, I need skills for auth hardening and rate limiting. Keep only trusted candidates.",
-      "expected_output": "Prioritizes security workflow skills with trust reasons and fit scoring.",
+      "expected_output": "Prioritizes security workflow skills with trust reasons and fit scoring, then orders equal-fit options by popularity.",
       "files": [],
       "expectations": [
         "candidate cards include trust reason",
         "cards include fit score and verdict",
+        "when fit ties, higher installs appear first",
         "assistant asks Keep selection per query"
       ]
     },

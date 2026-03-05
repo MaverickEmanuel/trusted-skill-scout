@@ -48,10 +48,10 @@ Note: lower overlap risk is better, so scoring uses `overlap_bonus = 6 - overlap
 
 ## Tie-Breakers
 
-When totals tie, sort by:
+When totals tie (equal relevance), prioritize popularity and sort by:
 
-1. stars desc
-2. installs desc
+1. installs desc
+2. stars desc
 3. owner/repo asc
 4. skill_name asc
 

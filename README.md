@@ -44,7 +44,7 @@ npx skills add MaverickEmanuel/trusted-skill-scout --skill "<skill_name>"
 
 1. Ask install scope first (`Project-only` default).
 2. Profile the repo and generate 6-10 focused discovery queries.
-3. Trust-filter and rank candidates with transparent fit scoring.
+3. Trust-filter and rank candidates with transparent fit scoring; if fit ties, prioritize popularity (`installs`, then `stars`).
 4. Install only approved skills, then verify with `npx skills list` and `npx skills check`.
 
 ## Trust model
