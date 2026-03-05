@@ -6,7 +6,7 @@ Find trusted, high-signal agent skills for any repo, then install only what you 
 
 [![GitHub stars](https://img.shields.io/github/stars/MaverickEmanuel/trusted-skill-scout?style=flat-square)](https://github.com/MaverickEmanuel/trusted-skill-scout)
 
-[Open on skills.sh](https://skills.sh/YOUR-SKILL-PAGE) • [Star on GitHub](https://github.com/MaverickEmanuel/trusted-skill-scout) • [Read the spec](./SKILL.md)
+[Open on skills.sh](https://skills.sh/maverickemanuel/trusted-skill-scout/trusted-skill-scout) • [Star on GitHub](https://github.com/MaverickEmanuel/trusted-skill-scout) • [Read the spec](./SKILL.md)
 
 </div>
 
