@@ -1,0 +1,74 @@
+{
+  "skill_name": "trusted-skill-scout",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I am in a Next.js repo and want useful skills for performance, testing, and release quality. Find and install only trusted options.",
+      "expected_output": "Asks install scope first, states skill purpose, profiles repo, generates targeted queries, applies trust filter, collects keep choices (interactive when available), and installs confirmed picks.",
+      "files": [],
+      "expectations": [
+        "install scope prompt appears first with project-only default",
+        "assistant clearly states the skill purpose after scope selection",
+        "queries are repo-aware and not generic only",
+        "per-query options show up to 4 trust-eligible candidates when available",
+        "final output includes deterministic install commands"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "For this Express API repo, I need skills for auth hardening and rate limiting. Keep only trusted candidates.",
+      "expected_output": "Prioritizes security workflow skills with trust reasons and fit scoring, then orders equal-fit options by popularity.",
+      "files": [],
+      "expectations": [
+        "candidate cards include trust reason",
+        "cards include fit score and verdict",
+        "when fit ties, higher installs appear first",
+        "assistant uses interactive multi-select per query when available with deterministic Keep fallback"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "This data pipeline repo uses Python and dbt. Help me find skills for reliability, testing, and incident triage.",
+      "expected_output": "Generates workflow-specific queries and proposes a complementary bundle.",
+      "files": [],
+      "expectations": [
+        "repo profile references pipeline context",
+        "query list includes reliability/testing intent",
+        "final shortlist includes overlap notes"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "In our React Native app repo, help me find skills for release QA and crash triage, then install project-only.",
+      "expected_output": "Uses mobile-relevant discovery and installs in project scope.",
+      "files": [],
+      "expectations": [
+        "scope choice is honored as project-only",
+        "recommendations are mobile workflow relevant",
+        "verification includes npx skills list and npx skills check"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "I have a monorepo with web, api, and workers. Find skills for CI governance and code quality and let me choose.",
+      "expected_output": "Profiles monorepo complexity and surfaces trust-eligible CI/code quality skills.",
+      "files": [],
+      "expectations": [
+        "uses human-in-the-loop per-query selection with interactive multi-select when available",
+        "applies trust gate before presenting options",
+        "dedupes final shortlist"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "We are migrating a legacy Rails service to Node. Find trusted skills to plan safe migration slices and validation gates.",
+      "expected_output": "Recommends migration and verification skills with explicit trust justification.",
+      "files": [],
+      "expectations": [
+        "handles legacy constraints in repo profile",
+        "fit scoring includes implementation clarity",
+        "final report includes retry commands for failures"
+      ]
+    }
+  ]
+}

@@ -25,32 +25,33 @@ Assistant: Repo profile
 Assistant: Query 1/6: `express jwt auth security skill`
 
 [1] owner-a/security-skills@api-auth-hardening
-Installs: 214 | Stars: 603
+Trust: installs>=100
 Fit: 16/20 | Verdict: Strong fit
 Why: directly targets JWT middleware and route protection.
-Agent recommendation: Keep — high fit, low overlap, and highest installs.
+Agent recommendation: Keep - high fit, low overlap, and highest installs.
 
 [2] owner-b/dev-skills@secure-http-checklist
-Installs: 89 | Stars: 512
+Trust: stars>=500
 Fit: 16/20 | Verdict: Strong fit
 Why: strong auth hardening coverage, but lower installs than option 1.
-Agent recommendation: Keep — strong fit, but secondary to option 1 on popularity.
+Agent recommendation: Keep - strong fit, but secondary to option 1 on popularity.
 
 [3] owner-c/ops-skills@api-rate-limit-guardrails
-Installs: 176 | Stars: 298
+Trust: installs>=100
 Fit: 15/20 | Verdict: Strong fit
 Why: focused on distributed rate limiting and abuse mitigation workflows.
-Agent recommendation: Keep — complements auth hardening with low overlap.
+Agent recommendation: Keep - complements auth hardening with low overlap.
 
 [4] owner-d/platform-skills@incident-ready-api-runbooks
-Installs: 341 | Stars: 720
+Trust: stars>=500
 Fit: 12/20 | Verdict: Maybe
 Why: useful incident patterns, but broader than immediate auth goals.
-Agent recommendation: Skip — useful later, lower immediate value than 1 and 3.
+Agent recommendation: Skip - useful later, lower immediate value than 1 and 3.
 
-Query 1/6 — Select skills to keep (e.g. 1,3 or none):
+Select skills to keep for this query
+(Use arrow keys to move, Space to toggle, Enter to confirm)
 
-User: 1,3
+User: (selected 1 and 3)
 
 Assistant: Selection recorded: Keep: 1,3
 

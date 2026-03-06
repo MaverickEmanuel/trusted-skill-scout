@@ -91,7 +91,7 @@ Because this repo is mostly Markdown + JSON, style consistency matters more than
 - Keep JSON keys and rubric terms in `snake_case` when already defined that way.
 - Keep command placeholders in angle brackets: `<owner/repo>`, `<skill_name>`, `<query>`.
 - Use clear, deterministic labels in user-facing cards:
-  - `Installs:` / `Stars:`
+  - `Trust:`
   - `Fit:`
   - `Verdict:`
   - `Agent recommendation:`

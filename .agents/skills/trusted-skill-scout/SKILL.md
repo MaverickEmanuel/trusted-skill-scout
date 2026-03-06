@@ -32,20 +32,17 @@ Follow this flow in order. Do not skip gates.
 
 ## Step 0: Ask Scope First
 
-Call the **Question tool** exactly once at the beginning:
+Always ask exactly once at the beginning:
 
-```
-Question: "Install approved skills as Global or Project-only? (default: Project-only)"
-```
+`Install approved skills as Global or Project-only? (default: Project-only)`
 
-After the user responds, state the purpose clearly in one line before proceeding:
+After scope is chosen, state the purpose clearly in one line:
 
 `What this skill does: discovers repo-relevant skills, applies a trust gate, and installs only the skills you explicitly approve.`
 
 Rules:
-- If the user does not answer explicitly or says "default", use `Project-only`.
+- If user does not choose explicitly, use `Project-only`.
 - Persist this choice for all install commands in this run.
-- Do not run any discovery steps before the user has answered this question.
 
 ## Step 1: Profile Repository
 
@@ -82,25 +79,22 @@ Good query dimensions:
 
 Do not use a fixed redesign-only query list.
 
-## Step 3: Run Discovery One Query at a Time
+## Step 3: Run Discovery Sequentially
 
-**Critical**: Do NOT batch or parallelize the bash calls. Run one query, present results to the user, collect their selection via the Question tool, then move to the next query.
+For each query, run:
 
-For each query, the sequence is:
-1. Run: `npx skills find "<query>"`
-2. Apply trust filter (Step 5) and fit scoring (Step 6) to the results.
-3. Present the ranked cards for that query (see Step 7).
-4. Call the **Question tool** to collect the user's selection before running the next query.
-5. Repeat for the next query.
+`npx skills find "<query>"`
 
-From each command output, extract candidate rows with:
+Process queries one at a time.
+
+From output, extract candidate rows with:
 - `owner/repo@skill_name`
 - installs (if present)
 - skills.sh URL
 
 Normalization rules:
 - Strip ANSI color escape sequences before parsing.
-- Parse installs as an integer; `K/M` suffixes should be converted to absolute values (e.g. `8.1K` → `8100`).
+- Parse installs as an integer; `K/M` suffixes should be converted to absolute values.
 - If installs missing, set installs to `0`.
 
 ## Step 4: Enrich Candidate Metadata
@@ -167,36 +161,37 @@ Display count rules:
 - Target 3-4 options when available.
 - If fewer than 3 are eligible, show all eligible options.
 
-Card format (use this exact layout every time, no variation):
+Card format:
 
-```
-[N] owner/repo@skill_name
-Installs: <count> | Stars: <count>
-Fit: <fit_total>/20 | Verdict: <Strong fit | Maybe>
-Why: <one line repo-specific rationale>
-Agent recommendation: <Keep | Skip> — <short reason>
-```
+`[1] owner/repo@skill_name`
+`Trust: <allowlist|installs>=100|stars>=500>`
+`Fit: <fit_total>/20 | Verdict: <Strong fit|Maybe>`
+`Why: <one line repo-specific rationale>`
+`Agent recommendation: <Keep|Skip> + short reason`
 
-- Always show the raw parsed counts on the Installs/Stars line, even if one is 0.
-- Do not add a separate Trust line — the numbers speak for themselves.
+Then collect selection with an interactive multi-select prompt when available.
 
-After presenting all cards for the query, call the **Question tool**:
+Preferred prompt behavior:
+- Use arrow keys to move.
+- Use Space to toggle one or more options.
+- Use Enter to confirm.
+- Prompt text: `Select skills to keep for this query`
 
-```
-Question: "Query N/total — Select skills to keep (e.g. 1,3 or none):"
-```
-
-After receiving the answer, echo a deterministic record line before moving on:
+After interactive confirmation, echo a deterministic record line:
 
 `Selection recorded: Keep: 1,3`
 
-or if nothing selected:
+If nothing selected:
 
 `Selection recorded: Keep: none`
 
+Fallback (if interactive prompt is unavailable):
+
+`Your choice? Keep: 1,3 or Keep: none`
+
 Selection rules:
 - Accept only indices shown for that query.
-- Do not proceed to the next query until the user has answered.
+- Continue to next query after selection.
 
 ## Step 8: Final Shortlist
 
@@ -204,13 +199,11 @@ After all queries:
 - dedupe selections by `(owner, repo, skill_name)`
 - provide overlap/conflict notes
 - propose a best bundle (usually 3-5 complementary skills)
-- call the **Question tool** for the final gate:
+- ask one final gate:
 
-```
-Question: "Install these now? (Yes / Revise list)"
-```
+`Install these now? Yes / Revise list`
 
-Proceed only if the user answers `Yes` or equivalent confirmation. If they say `Revise`, ask which skills to add or remove and update the shortlist before asking again.
+Proceed only on `Yes`.
 
 ## Step 9: Install Sequentially (Deterministic)
 
@@ -257,9 +250,10 @@ Use concise sections:
 - goals
 
 3. Query N Results
-- ranked eligible cards (up to 4 per query)
-- one explicit agent recommendation per card
-- Question tool call for user selection before next query
+- ranked eligible cards
+- show up to 4 options per query (3-4 when available)
+- one explicit agent pick
+- interactive multi-select prompt (fallback: `Your choice? Keep: ...`)
 
 4. Final Shortlist
 - deduped list

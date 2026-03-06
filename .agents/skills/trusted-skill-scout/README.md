@@ -66,12 +66,15 @@ Missing numeric metadata is treated as `0` unless allowlisted.
 
 ```text
 [1] owner/repo@skill_name
-Installs: 312 | Stars: 847
+Trust: stars>=500
 Fit: 17/20 | Verdict: Strong fit
 Why: matches this repo's test + CI workflow
-Agent recommendation: Keep — high impact, low overlap
+Agent recommendation: Keep - high impact, low overlap
 
-Query 1/3 — Select skills to keep (e.g. 1,3 or none):
+Select skills to keep for this query
+(Use arrow keys to move, Space to toggle, Enter to confirm)
+
+Fallback: Your choice? Keep: 1,3 or Keep: none
 ```
 
 ## Learn more
